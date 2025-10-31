@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This is the **Anthropic Skills Repository** - a collection of example skills that demonstrate Claude's skills system capabilities. Skills are folders containing instructions, scripts, and resources that Claude loads dynamically to improve performance on specialized tasks.
 
 The repository contains:
-- **Example skills** (`skills/algorithmic-art`, `skills/artifacts-builder`, `skills/canvas-design`, `skills/mcp-builder`, `skills/slack-gif-creator`, `skills/webapp-testing`, etc.) - Open source (Apache 2.0)
+- **Example skills** (`skills/algorithmic-art`, `skills/artifacts-builder`, `skills/brand-guidelines`, `skills/canvas-design`, `skills/claude-md-architect`, `skills/internal-comms`, `skills/mcp-builder`, `skills/slack-gif-creator`, `skills/theme-factory`, `skills/webapp-testing`) - Open source (Apache 2.0)
 - **Document skills** (`skills/document-skills/docx`, `skills/document-skills/pdf`, `skills/document-skills/pptx`, `skills/document-skills/xlsx`) - Source-available reference implementations
 - **Meta skills** (`skills/skill-creator`, `skills/template-skill`) - Tools for creating new skills
 
@@ -37,19 +37,51 @@ Skills use a three-level loading system to manage context efficiently:
 ### Plugin Marketplace Structure
 
 The `.claude-plugin/marketplace.json` defines two plugin collections:
-- **document-skills** - Production-grade document processing suite
+- **document-skills** - Production-grade document processing suite (docx, pdf, pptx, xlsx)
 - **example-skills** - Reference implementations for learning and inspiration
+
+**When adding new skills to marketplace:**
+```bash
+# 1. Add skill path to appropriate plugin in marketplace.json
+# 2. Update plugin description if needed
+# 3. Verify JSON is valid
+cat .claude-plugin/marketplace.json | python3 -m json.tool > /dev/null && echo "Valid JSON"
+
+# 4. Verify skill exists at specified path
+# Example: if path is "./skills/my-skill", ensure skills/my-skill/SKILL.md exists
+```
+
+**Marketplace version:** Increment `metadata.version` when adding/removing skills
+
+## Critical Rules
+
+**Before creating/modifying skills:**
+1. **Skill name MUST match directory name** (exact match, hyphen-case)
+2. **YAML frontmatter is mandatory** (`name` and `description` required)
+3. **Use skill-creator skill** - DO NOT manually create skill folders
+4. **Test skills** before claiming they work
+
+**Before claiming "production-ready":**
+```bash
+# Verify SKILL.md exists and has valid frontmatter
+grep -A 2 "^---$" skills/YOUR-SKILL/SKILL.md
+
+# Test skill loads properly in Claude Code
+# (manual verification required)
+```
 
 ## Working with Skills
 
 ### Creating a New Skill
 
-**DO NOT manually create skill folders.** The skill-creator skill provides guidance, but note:
-- Reference `skills/template-skill/SKILL.md` for the basic structure
-- YAML frontmatter requires `name` (hyphen-case) and `description` (when to use this skill)
-- Skill name must match directory name
-- Use imperative/infinitive form (verb-first instructions), not second person
-- Write for another Claude instance to consume
+**MANDATORY: Use the skill-creator skill** - DO NOT manually create folders.
+
+**Required structure:**
+- Reference `skills/template-skill/SKILL.md` for basic structure
+- YAML frontmatter: `name` (hyphen-case) + `description` (when to use)
+- Skill name = directory name (exact match)
+- Use imperative form: "Do X" not "You should do X"
+- Write for AI consumption, not humans
 
 ### Skill Content Guidelines
 
@@ -88,6 +120,47 @@ When testing or using skills:
 - `skills/` - Directory containing all skill implementations
 - `skills/skill-creator/SKILL.md` - Comprehensive guide for building effective skills
 - `skills/template-skill/SKILL.md` - Minimal starting template
+
+## Anti-Patterns
+
+**❌ DO NOT:**
+- Manually create skill folders without using skill-creator
+- Use second-person writing ("you should") in SKILL.md - use imperative ("do this")
+- Include generic development advice in skills (AI already knows best practices)
+- Document "how to use" standard tools - focus on WHICH tools/patterns THIS project uses
+- Create skills with names that don't match their directory names
+- Skip YAML frontmatter validation before claiming skill is ready
+- Add shared dependencies between skills - each must be self-contained
+
+**✅ DO:**
+- Use skill-creator for all new skills
+- Write in imperative form for AI consumption
+- Focus on domain-specific, procedural knowledge
+- Test skills before claiming they work
+- Keep skills self-contained with no cross-dependencies
+- Reference bundled resources explicitly so Claude knows they exist
+
+## Skill Completion Checklist
+
+Before marking a skill as complete:
+
+```bash
+# [ ] SKILL.md exists with valid YAML frontmatter
+grep -A 2 "^---$" skills/YOUR-SKILL/SKILL.md
+
+# [ ] Skill name matches directory name
+basename skills/YOUR-SKILL/
+
+# [ ] If in marketplace.json, path is correct
+grep "YOUR-SKILL" .claude-plugin/marketplace.json
+
+# [ ] marketplace.json is valid JSON
+cat .claude-plugin/marketplace.json | python3 -m json.tool > /dev/null
+
+# [ ] Skills uses imperative form (not second-person)
+# [ ] Skill tested in Claude Code (manual)
+# [ ] No shared dependencies with other skills
+```
 
 ## Important Notes
 
