@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Anthropic example skills",
-    "version": "1.1.0"
+    "version": "1.2.0"
   },
   "plugins": [
     {
@@ -23,7 +23,7 @@
     },
     {
       "name": "example-skills",
-      "description": "Collection of example skills demonstrating various capabilities including CLAUDE.md generation, skill creation, MCP building, visual design, algorithmic art, internal communications, web testing, artifact building, Slack GIFs, and theme styling",
+      "description": "Collection of example skills demonstrating various capabilities including CLAUDE.md generation, skill creation, MCP building, visual design, algorithmic art, internal communications, web testing, artifact building, Slack GIFs, theme styling, and product shaping",
       "source": "./",
       "strict": false,
       "skills": [
@@ -37,7 +37,8 @@
         "./skills/artifacts-builder",
         "./skills/slack-gif-creator",
         "./skills/theme-factory",
-        "./skills/brand-guidelines"
+        "./skills/brand-guidelines",
+        "./skills/product-shaper"
       ]
     }
   ]
