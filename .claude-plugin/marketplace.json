@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Anthropic example skills",
-    "version": "1.0.0"
+    "version": "1.0.1"
   },
   "plugins": [
     {
@@ -15,10 +15,10 @@
       "source": "./",
       "strict": false,
       "skills": [
-        "./document-skills/xlsx",
-        "./document-skills/docx",
-        "./document-skills/pptx",
-        "./document-skills/pdf"
+        "./skills/document-skills/xlsx",
+        "./skills/document-skills/docx",
+        "./skills/document-skills/pptx",
+        "./skills/document-skills/pdf"
       ]
     },
     {
@@ -27,16 +27,16 @@
       "source": "./",
       "strict": false,
       "skills": [
-        "./skill-creator",
-        "./mcp-builder",
-        "./canvas-design",
-        "./algorithmic-art",
-        "./internal-comms",
-        "./webapp-testing",
-        "./artifacts-builder",
-        "./slack-gif-creator",
-        "./theme-factory",
-        "./brand-guidelines"
+        "./skills/skill-creator",
+        "./skills/mcp-builder",
+        "./skills/canvas-design",
+        "./skills/algorithmic-art",
+        "./skills/internal-comms",
+        "./skills/webapp-testing",
+        "./skills/artifacts-builder",
+        "./skills/slack-gif-creator",
+        "./skills/theme-factory",
+        "./skills/brand-guidelines"
       ]
     }
   ]
