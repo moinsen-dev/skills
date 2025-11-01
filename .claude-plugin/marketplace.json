@@ -5,13 +5,58 @@
     "email": "klazuka@anthropic.com"
   },
   "metadata": {
-    "description": "Anthropic example skills",
-    "version": "1.2.0"
+    "description": "Anthropic skills collection organized by functional domain",
+    "version": "2.0.0"
   },
   "plugins": [
     {
-      "name": "document-skills",
-      "description": "Collection of document processing suite including Excel, Word, PowerPoint, and PDF capabilities",
+      "name": "product-management",
+      "description": "Strategic product development skills including product shaping, goal navigation, and feature prioritization",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/product-shaper",
+        "./skills/goal-navigator"
+      ]
+    },
+    {
+      "name": "development",
+      "description": "Software development tools including MCP server building, CLAUDE.md generation, skill creation, artifact building, and web application testing",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/mcp-builder",
+        "./skills/claude-md-architect",
+        "./skills/skill-creator",
+        "./skills/artifacts-builder",
+        "./skills/webapp-testing"
+      ]
+    },
+    {
+      "name": "design",
+      "description": "Visual and creative design skills including canvas art, algorithmic art, theme styling, and brand guidelines",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/canvas-design",
+        "./skills/algorithmic-art",
+        "./skills/theme-factory",
+        "./skills/brand-guidelines"
+      ]
+    },
+    {
+      "name": "communication",
+      "description": "Internal and external communication tools including internal comms and Slack GIF creation",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/internal-comms",
+        "./skills/slack-gif-creator"
+      ]
+    },
+    {
+      "name": "document-processing",
+      "description": "Document processing suite including Excel, Word, PowerPoint, and PDF capabilities",
       "source": "./",
       "strict": false,
       "skills": [
@@ -19,26 +64,6 @@
         "./skills/document-skills/docx",
         "./skills/document-skills/pptx",
         "./skills/document-skills/pdf"
-      ]
-    },
-    {
-      "name": "example-skills",
-      "description": "Collection of example skills demonstrating various capabilities including CLAUDE.md generation, skill creation, MCP building, visual design, algorithmic art, internal communications, web testing, artifact building, Slack GIFs, theme styling, and product shaping",
-      "source": "./",
-      "strict": false,
-      "skills": [
-        "./skills/claude-md-architect",
-        "./skills/skill-creator",
-        "./skills/mcp-builder",
-        "./skills/canvas-design",
-        "./skills/algorithmic-art",
-        "./skills/internal-comms",
-        "./skills/webapp-testing",
-        "./skills/artifacts-builder",
-        "./skills/slack-gif-creator",
-        "./skills/theme-factory",
-        "./skills/brand-guidelines",
-        "./skills/product-shaper"
       ]
     }
   ]
